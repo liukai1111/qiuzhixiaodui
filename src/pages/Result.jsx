@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { Button } from 'antd-mobile'
 import { dimensions } from '../data/questions'
 import { generateReport } from '../data/reportGenerator'
+import qrcodeImg from '../assets/qrcode.jpg'
 import styles from './Result.module.css'
 
 
@@ -352,19 +353,13 @@ export default function Result() {
         ) : null}
       </div>
 
-      {/* 重新测评 */}
-      <div className={styles.restart}>
-        <Button
-          color="default"
-          fill="none"
-          onClick={() => {
-            localStorage.removeItem('survey_results')
-            localStorage.removeItem('survey_answers')
-            window.location.href = '/portal'
-          }}
-        >
-          重新测评
-        </Button>
+      {/* 报告底部：企业微信二维码 */}
+      <div className={styles.reportFollow}>
+        <h3>想更了解你的职业规划，添加小助手</h3>
+        <div className={styles.reportQrPlaceholder}>
+          <img className={styles.reportQrImage} src={qrcodeImg} alt="小助手二维码" />
+          <p className={styles.reportQrHint}>长摁图片添加求职小队小助手</p>
+        </div>
       </div>
 
       <footer className={styles.footer}>
