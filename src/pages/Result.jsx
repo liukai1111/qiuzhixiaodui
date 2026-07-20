@@ -71,7 +71,13 @@ function parseReport(text) {
       i++; continue
     }
     if (trimmed.startsWith('## ')) {
-      elements.push(<h2 key={i} dangerouslySetInnerHTML={{__html: inlineFormat(trimmed.slice(3))}} />)
+      const headingText = trimmed.slice(3)
+      const isChapter = /^第.+章/.test(headingText)
+      elements.push(
+        isChapter
+          ? <h2 key={i} className={styles.chapterBlock} dangerouslySetInnerHTML={{__html: inlineFormat(headingText)}} />
+          : <h2 key={i} dangerouslySetInnerHTML={{__html: inlineFormat(headingText)}} />
+      )
       i++; continue
     }
 
@@ -363,7 +369,7 @@ export default function Result() {
       </div>
 
       <footer className={styles.footer}>
-        <p>© 2025 求职小队版权所有</p>
+        <p>© 2026 求职小队版权所有</p>
       </footer>
     </div>
   )

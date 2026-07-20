@@ -66,7 +66,7 @@ function generateReport(scores, phone) {
     generateReportFooter(phone),
   ]
 
-  return sections.join('\n\n').replace(/\\n/g, '\n')
+  return (sections[0] + '\n' + sections.slice(1).join('\n\n')).replace(/\\n/g, '\n')
 }
 
 // ============ 封面（仅标题）============
@@ -102,7 +102,6 @@ function generateChapter1Overview(scores, top3, bottom3, avgScore, totalScore) {
   const bottomNames = bottom3.map(s => nm(s)).join('、')
 
   return `## 第一章：能力全景与职业人格
-
 ### 能力概况
 
 ${levelDesc[level]}
@@ -215,7 +214,6 @@ function generateChapter2CoreStrengths(top3, bottom3) {
   const loop = buildLoop(topKey, bottomKey, topLabel, bottomLabel)
 
   return `## 第二章：你的核心优势
-
 ### 你的招牌能力
 
 你的核心优势是 **${nm(a)}** 能力和 **${nm(b)}** 能力。这两项是你最容易被看见、也最能体现你价值的"招牌能力"——别人在想起你时，往往先想到你在这两件事上靠不靠谱。
@@ -348,7 +346,6 @@ function buildLoop(topKey, bottomKey, topLabel, bottomLabel) {
 function generateChapter3DimensionDetail(scores) {
   const parts = scores.map(s => generateSingleDimension(s))
   return `## 第三章：七维能力解读
-
 > 七种力量没有高下之分，得分高不代表更强，得分低也不等于不会。下面按你的得分从高到低，逐一展开每个维度的核心价值。
 
 ${parts.join('\n\n')}`
@@ -540,15 +537,12 @@ function generateChapter4CareerGuide(scores, top3, bottom3) {
   // 收尾实验卡（已删除）
 
   return `## 第四章：职业说明书
-
 > 这里不给你"该投什么岗位"的标准答案——但我们会基于你的能力结构，告诉你"什么样的工作让你最容易出彩"，并推荐最适合你的职业方向。
 
 ### 🧭 适配工作类型
-
 ${workStyleAnalysis}
 
 ### 💡 适合你的岗位推荐
-
 > 基于上面分析的"适配工作类型"，以下是为你量身推荐的 **职业方向和具体岗位**。每个推荐都标注了匹配理由和发展路径参考。
 
 ${jobRecommendations}`
@@ -577,7 +571,6 @@ ${picks.map(b => `- 《${b.name}》——${b.reason}`).join('\n')}`
   }).join('\n\n')
 
   return `## 第五章：成长书单与提升建议
-
 > 基于你的能力结构，我们为你精选了针对性阅读书单。优势要"拉得更长"，短板要"补在关键处"——两条线一起走，成长最快。
 
 ### 📚 优势强化阅读（让长板更长）
